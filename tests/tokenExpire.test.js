@@ -31,10 +31,10 @@ describe('Token expiration and refresh test', () => {
         const infoRes = await request(server)
             .get('/api/v1/information')
             .set('authorization', `bearer ${loginRes.body.accessToken}`)
-
-        expect(infoRes.status).toBe(200)
-        expect(infoRes.body.length > 0).toBe(true)
-        await timeout(10500)
+            expect(infoRes.status).toBe(200);
+            expect(Object.keys(infoRes.body).length > 0).toBe(true);
+            await timeout(10500);
+        
 
         const serverResponse = await request(server)
             .get('/api/v1/information')
@@ -67,7 +67,7 @@ describe('Token expiration and refresh test', () => {
             .set('authorization', `bearer ${data.body.accessToken}`)
 
         expect(infoRes2.status).toBe(200)
-        expect(infoRes2.body.length > 0).toBe(true)
+        expect(Object.keys(infoRes2.body).length > 0).toBe(true);
         done();
     }, 35000)
 }, 35000)
